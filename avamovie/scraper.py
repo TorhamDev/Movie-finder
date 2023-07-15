@@ -7,7 +7,7 @@ class AvaMovieScraper:
     Scraper class for avamovie website scraber
     """
 
-    def search(search_param: str) -> list:
+    def search(self, search_param: str) -> list:
         """
         The search scraper for avamovie search
 
@@ -68,7 +68,14 @@ class AvaMovieScraper:
 
         return results
 
-    def _clean_text(text: str) -> str:
+    def search_and_extract_data(self, search_param: str) -> dict:
+
+        search_results = self.search(search_param)
+        extracted_data = self.extract_search_data(search_results)
+
+        return extracted_data
+
+    def _clean_text(self, text: str) -> str:
         """
         Cleaning extra chars from persian sentence we got in search result
 
