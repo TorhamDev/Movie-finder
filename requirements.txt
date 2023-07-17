@@ -6,8 +6,12 @@ emoji==1.7.0
 ftfy==6.1.1
 idna==3.4
 lxml==4.9.3
+markdown-it-py==3.0.0
+mdurl==0.1.2
 pycodestyle==2.10.0
+Pygments==2.15.1
 requests==2.31.0
+rich==13.4.2
 soupsieve==2.4.1
 urllib3==2.0.3
 wcwidth==0.2.6
