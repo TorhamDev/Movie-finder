@@ -7,6 +7,30 @@ class AvaMovieScraper:
     Scraper class for avamovie website scraber
     """
 
+    def get_movie_download_links(self, movie_link):
+        data = requests.get(movie_link, allow_redirects=False).content
+        soup = BeautifulSoup(data, features="lxml")
+        links_data = soup.find_all("div", class_="row_data")
+        result = dict()
+
+        for link in links_data:
+            if "نیازمند اشتراک" not in link.text:
+                download_link = link.find(
+                    "a",
+                    class_="siteSingle__boxContent__downloadContent__link"
+                )["href"]
+
+                quality_info = link.find("div", class_="quality")
+                subtilte_status = quality_info.span.text
+                quality_info = self._clean_text(
+                    quality_info.text.replace(subtilte_status, "")
+                ).replace(" ", "")
+                quality_info = f"{quality_info} [{subtilte_status}]"
+
+                result[quality_info] = download_link
+
+        return result
+
     def search(self, search_param: str) -> list:
         """
         The search scraper for avamovie search
@@ -28,9 +52,9 @@ class AvaMovieScraper:
             )
             data = requests.get(url, allow_redirects=False).content
             soup = BeautifulSoup(data, features="lxml")
-            names = soup.find_all("article", class_="sitePost")
-            [all_results.append(i) for i in names]
-            if len(names) < 10:
+            search_result = soup.find_all("article", class_="sitePost")
+            [all_results.append(i) for i in search_result]
+            if len(search_result) < 10:
                 break
 
             start_page += 1
@@ -94,6 +118,9 @@ class AvaMovieScraper:
             " "
         ).replace(
             "\n",
+            " "
+        ).replace(
+            "\r",
             " "
         )
 
