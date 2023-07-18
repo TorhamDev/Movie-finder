@@ -26,7 +26,7 @@ def print_banner() -> None:
     print(banner)
 
 
-def clear_terminal() -> None:
+def clear_terminal_screen() -> None:
     """
     clearing terminal by running clear in linux and mac. and cls in windows
     """
