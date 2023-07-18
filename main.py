@@ -3,8 +3,8 @@ from rich.prompt import Prompt
 from rich.panel import Panel
 
 from models.tools import print_banner, clear_terminal
+from models.messages import ShowMessage
 from avamovie.scraper import AvaMovieScraper
-
 
 
 def main():
@@ -12,37 +12,37 @@ def main():
 
     search_param = Prompt.ask(":sparkles: Search Movie Name")
 
-    print("\n\n:tractor:[deep_pink1] Searching...[/deep_pink1]")
+    ShowMessage.searching()
 
     search_result = scraper.search_and_extract_data(search_param)
-
     clear_terminal()
 
-    result_keys = list(search_result.keys())
-
-
-    if len(result_keys) == 0:
-        print("\n\n\t\t :no_entry_sign: Nothing found :flushed:")
+    if not search_result:
+        ShowMessage.nothing_found()
         quit()
 
     counter = 0
-    for result_key in result_keys:
+    links = dict()
+    for result_key in list(search_result.keys()):
         print(f"\n\t :movie_camera: {counter}. {result_key}")
+        links[counter] = result_key
         counter += 1
 
     choiced_link = Prompt.ask("\n :fire: pick one")
-    choiced_movie = search_result[result_keys[int(choiced_link)]]
+    choiced_movie = search_result[links[int(choiced_link)]]
 
-    print(Panel(choiced_movie["movie_discription"]))
+    ShowMessage.searching_for_links()
 
-    print("\n\n:tractor:[deep_pink1] Searching for download links...[/deep_pink1]")
-
-    download_links = scraper.get_movie_download_links(choiced_movie["movie_link"])
+    download_links = scraper.get_movie_download_links(
+        choiced_movie["movie_link"]
+    )
 
     clear_terminal()
 
+    print(Panel(choiced_movie["movie_discription"]))
+
     for quality, download_link in download_links.items():
-        print(quality, "=>", download_link)
+        print("\n:star2:", quality, "=>", download_link)
 
 
 if __name__ == "__main__":

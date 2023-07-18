@@ -97,6 +97,9 @@ class AvaMovieScraper:
         search_results = self.search(search_param)
         extracted_data = self.extract_search_data(search_results)
 
+        if len(extracted_data.keys()) == 0:
+            return False
+
         return extracted_data
 
     def _clean_text(self, text: str) -> str:

@@ -3,7 +3,7 @@ A scraper script to search for movies and find movie download links from my favo
 
 TODO :
 - [X] Add python rich
-- [ ] Make script for onyl movies
+- [X] Make script for onyl movies
 - [ ] Add time report for search
 - [ ] Fix spider man moveis
 - [ ] Trying to handle receiving serial links
