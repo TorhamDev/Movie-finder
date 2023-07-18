@@ -12,13 +12,13 @@ def main():
 
     search_param = Prompt.ask(":sparkles: Search Movie Name")
 
-    ShowMessage.searching()
+    ShowMessage.searching_message()
 
     search_result = scraper.search_and_extract_data(search_param)
     clear_terminal()
 
     if not search_result:
-        ShowMessage.nothing_found()
+        ShowMessage.nothing_found_message()
         quit()
 
     counter = 0
@@ -31,7 +31,7 @@ def main():
     choiced_link = Prompt.ask("\n :fire: pick one")
     choiced_movie = search_result[links[int(choiced_link)]]
 
-    ShowMessage.searching_for_links()
+    ShowMessage.searching_for_links_message()
 
     download_links = scraper.get_movie_download_links(
         choiced_movie["movie_link"]

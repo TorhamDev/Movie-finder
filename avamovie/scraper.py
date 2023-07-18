@@ -7,8 +7,15 @@ class AvaMovieScraper:
     Scraper class for avamovie website scraber
     """
 
-    def get_movie_download_links(self, movie_link):
-        data = requests.get(movie_link, allow_redirects=False).content
+    def get_movie_download_links(self, download_page_link: str) -> dict:
+        """
+        Scraping movie download page and extracing movie download links
+
+        param : movie download page link
+
+        retrun: movie links in different qualities
+        """
+        data = requests.get(download_page_link, allow_redirects=False).content
         soup = BeautifulSoup(data, features="lxml")
         links_data = soup.find_all("div", class_="row_data")
         result = dict()
