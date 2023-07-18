@@ -18,20 +18,22 @@ def main() -> None:
 
     ShowMessage.searching_message()
 
-    search_result = scraper.search_and_extract_data(movie_name)
+    search_results = scraper.search_and_extract_data(movie_name)
     clear_terminal_screen()
 
-    if not search_result:
+    if not search_results:
         ShowMessage.nothing_found_message()
         quit()
 
-    movie_page_links = dict()
-    for number, movie_name in enumerate(search_result.keys()):
-        print(f"\n\t :movie_camera: {number}. {movie_name}")
-        movie_page_links[number] = movie_name
+    movies_link_page = dict()
+    counter = 0
+    for movie_name, movie_data in search_results.items():
+        print(f"\n\t :movie_camera: {counter}. {movie_name}")
+        movies_link_page[counter] = movie_data
+        counter += 1
 
-    choiced_link = Prompt.ask("\n :fire: pick one")
-    choiced_movie = search_result[movie_page_links[int(choiced_link)]]
+    choiced_link = int(Prompt.ask("\n :fire: pick one"))
+    choiced_movie = movies_link_page[choiced_link]
 
     ShowMessage.searching_for_links_message()
 

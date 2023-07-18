@@ -76,11 +76,14 @@ class AvaMovieScraper:
 
         search_result : list of bs4 search result from avamovie
 
-        retrun : dict of {movie_name : {
+        retrun : dict of {
+        
+            movie_name : {
                 "movie_link": movie_link,
                 "movie_cover_link": movie_cover_link,
                 "movie_discription": discription, 
             }
+            ...
         }
         """
         results = dict()
