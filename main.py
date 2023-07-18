@@ -21,6 +21,11 @@ clear_terminal()
 
 result_keys = list(search_result.keys())
 
+
+if len(result_keys) == 0:
+    print("\n\n\t\t :no_entry_sign: Nothing found :flushed:")
+    quit()
+
 counter = 0
 for result_key in result_keys:
     print(f"\n\t :movie_camera: {counter}. {result_key}")
