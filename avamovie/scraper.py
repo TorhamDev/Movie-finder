@@ -15,6 +15,7 @@ class AvaMovieScraper:
 
         retrun: movie links in different qualities
         """
+
         data = requests.get(download_page_link, allow_redirects=False).content
         soup = BeautifulSoup(data, features="lxml")
         links_data = soup.find_all("div", class_="row_data")
@@ -28,12 +29,12 @@ class AvaMovieScraper:
                 )["href"]
 
                 quality_info = link.find("div", class_="quality")
-                subtilte_status = ""
-                if quality_info.span:
-                    subtilte_status = f"[{quality_info.span.text}]"
+                subtilte_status = f"[{quality_info.span.text}]" if quality_info.span else ""
+
                 quality_info = self._clean_text(
                     quality_info.text.replace(subtilte_status, "")
                 ).replace(" ", "")
+
                 quality_info = f"{quality_info} {subtilte_status}"
 
                 result[quality_info] = download_link
@@ -77,7 +78,7 @@ class AvaMovieScraper:
         search_result : list of bs4 search result from avamovie
 
         retrun : dict of {
-        
+
             movie_name : {
                 "movie_link": movie_link,
                 "movie_cover_link": movie_cover_link,
@@ -93,12 +94,11 @@ class AvaMovieScraper:
             discription = self._clean_text(
                 data.find("div", class_="plot").text)
 
-            movie_name = data.div.div.figure.a["title"]
-            movie_link = data.div.div.figure.a["href"]
-            movie_cover_link = data.div.div.figure.a.img["src"]
+            a_tag = data.div.div.figure.a
+            movie_name = a_tag["title"]
+            movie_link = a_tag["href"]
             results[movie_name] = {
                 "movie_link": movie_link,
-                "movie_cover_link": movie_cover_link,
                 "movie_discription": discription,
             }
 

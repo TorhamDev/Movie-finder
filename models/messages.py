@@ -1,7 +1,10 @@
 from rich import print
 
 
-class ShowMessage:
+class ShowNoticeMessage:
+    """
+    A place for all notice messages in the script
+    """
 
     def searching_message():
         print("\n\n:tractor:[deep_pink1] Searching...[/deep_pink1]")

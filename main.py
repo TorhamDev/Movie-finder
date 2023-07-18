@@ -3,7 +3,7 @@ from rich.prompt import Prompt
 from rich.panel import Panel
 
 from models.tools import print_banner, clear_terminal_screen
-from models.messages import ShowMessage
+from models.messages import ShowNoticeMessage
 from avamovie.scraper import AvaMovieScraper
 
 movie_scraper = AvaMovieScraper()
@@ -17,13 +17,13 @@ def main() -> None:
 
     movie_name = Prompt.ask(":sparkles: Enter Movie Name")
 
-    ShowMessage.searching_message()
+    ShowNoticeMessage.searching_message()
 
     search_results = movie_scraper.search_and_extract_data(movie_name)
     clear_terminal_screen()
 
     if not search_results:
-        ShowMessage.nothing_found_message()
+        ShowNoticeMessage.nothing_found_message()
         quit()
 
     movies_link_page = dict()
@@ -36,7 +36,7 @@ def main() -> None:
     choiced_link = int(Prompt.ask("\n :fire: pick one"))
     movie_informations = movies_link_page[choiced_link]
 
-    ShowMessage.searching_for_links_message()
+    ShowNoticeMessage.searching_for_links_message()
 
     download_links = movie_scraper.get_movie_download_links(
         movie_informations["movie_link"]
