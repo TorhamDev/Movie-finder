@@ -21,11 +21,13 @@ class AvaMovieScraper:
                 )["href"]
 
                 quality_info = link.find("div", class_="quality")
-                subtilte_status = quality_info.span.text
+                subtilte_status = ""
+                if quality_info.span:
+                    subtilte_status = f"[{quality_info.span.text}]"
                 quality_info = self._clean_text(
                     quality_info.text.replace(subtilte_status, "")
                 ).replace(" ", "")
-                quality_info = f"{quality_info} [{subtilte_status}]"
+                quality_info = f"{quality_info} {subtilte_status}"
 
                 result[quality_info] = download_link
 

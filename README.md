@@ -5,5 +5,5 @@ TODO :
 - [X] Add python rich
 - [X] Make script for onyl movies
 - [ ] Add time report for search
-- [ ] Fix spider man moveis
+- [X] Fix spider man moveis bug
 - [ ] Trying to handle receiving serial links
