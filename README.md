@@ -8,7 +8,7 @@
 Is a scraper script to search for movies and find movie download links from my **favorite** movie website (**avamovie**). As a result, I don't need to open the browser to find and download the movie! XD
 
 ## Demo :)
-![](./readme/Demo_Video.mp4)
+https://github.com/TorhamDev/Movie-finder/assets/87639984/9b9495d9-c426-49db-b62f-5eb2af2ccb9e
 
 
 
