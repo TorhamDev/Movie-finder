@@ -51,5 +51,6 @@ def main() -> None:
 
 
 if __name__ == "__main__":
+    clear_terminal_screen()
     print_banner()
     main()
