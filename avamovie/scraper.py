@@ -1,4 +1,8 @@
 from bs4 import BeautifulSoup
+from pydantic import HttpUrl
+
+from models.schema import MovieExtractedData, MovieLinksInfo
+
 import requests
 
 
@@ -7,7 +11,7 @@ class AvaMovieScraper:
     Scraper class for avamovie website scraber
     """
 
-    def get_movie_download_links(self, download_page_link: str) -> dict:
+    def get_movie_download_links(self, download_page_link: HttpUrl) -> MovieLinksInfo:
         """
         Scraping movie download page and extracing movie download links
 
@@ -71,7 +75,7 @@ class AvaMovieScraper:
 
         return all_results
 
-    def extract_search_data(self, search_results: list) -> dict:
+    def extract_search_data(self, search_results: list) -> MovieExtractedData:
         """
         extracting data from the bs4 objects we got from search funtion
 
@@ -103,7 +107,7 @@ class AvaMovieScraper:
 
         return results
 
-    def search_and_extract_data(self, search_param: str) -> dict:
+    def search_and_extract_data(self, search_param: str) -> MovieExtractedData | bool:
 
         search_results = self.search(search_param)
         extracted_data = self.extract_search_data(search_results)
