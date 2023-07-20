@@ -23,7 +23,7 @@ class AvaMovieScraper:
         data = requests.get(download_page_link, allow_redirects=False).content
         soup = BeautifulSoup(data, features="lxml")
         links_data = soup.find_all("div", class_="row_data")
-        result = dict()
+        result = dict(qualities={})
 
         for link in links_data:
             if "نیازمند اشتراک" not in link.text:
@@ -41,9 +41,9 @@ class AvaMovieScraper:
 
                 quality_info = f"{quality_info} {subtilte_status}"
 
-                result[quality_info] = download_link
+                result["qualities"][quality_info] = download_link
 
-        return result
+        return MovieLinksInfo(**result)
 
     def search(self, search_param: str) -> list:
         """

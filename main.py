@@ -46,7 +46,7 @@ def main() -> None:
 
     print(Panel(movie_informations.movie_discription))
 
-    for quality, download_link in download_links.items():
+    for quality, download_link in download_links.qualities.items():
         print("\n:star2:", quality, ":", download_link)
 
 
