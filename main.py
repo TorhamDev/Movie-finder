@@ -4,7 +4,7 @@ from rich.panel import Panel
 
 from models.tools import print_banner, clear_terminal_screen
 from models.messages import ShowNoticeMessage
-from avamovie.scraper import AvaMovieScraper
+from scraper import AvaMovieScraper
 
 movie_scraper = AvaMovieScraper()
 
@@ -28,7 +28,7 @@ def main() -> None:
 
     movies_link_page = dict()
     counter = 0
-    for movie_name, movie_data in search_results.items():
+    for movie_name, movie_data in search_results.movies.items():
         print(f"\n\t :movie_camera: {counter}. {movie_name}")
         movies_link_page[counter] = movie_data
         counter += 1

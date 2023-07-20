@@ -105,14 +105,16 @@ class AvaMovieScraper:
                 "movie_discription": discription,
             }
 
-        return results
+
+        print(results)
+        return MovieExtractedData(**results)
 
     def search_and_extract_data(self, search_param: str) -> MovieExtractedData | bool:
 
         search_results = self.search(search_param)
         extracted_data = self.extract_search_data(search_results)
 
-        if len(extracted_data.keys()) == 0:
+        if len(extracted_data.movies.keys()) == 0:
             return False
 
         return extracted_data
