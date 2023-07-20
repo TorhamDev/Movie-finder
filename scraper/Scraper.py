@@ -90,7 +90,7 @@ class AvaMovieScraper:
             ...
         }
         """
-        results = dict()
+        results = dict(movies={})
 
         for data in search_results:
 
@@ -100,7 +100,7 @@ class AvaMovieScraper:
             a_tag = data.div.div.figure.a
             movie_name = a_tag["title"]
             movie_link = a_tag["href"]
-            results[movie_name] = {
+            results["movies"][movie_name] = {
                 "movie_link": movie_link,
                 "movie_discription": discription,
             }

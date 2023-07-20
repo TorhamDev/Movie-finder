@@ -1,4 +1,5 @@
 from pydantic import BaseModel, HttpUrl
+from typing import Dict
 
 
 class Movie(BaseModel):
@@ -7,7 +8,7 @@ class Movie(BaseModel):
 
 
 class MovieExtractedData(BaseModel):
-   movies: dict[str, Movie]
+   movies: Dict[str, Movie]
 
 
 class MovieLinksInfo(BaseModel):
