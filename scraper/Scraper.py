@@ -95,7 +95,8 @@ class AvaMovieScraper:
         for data in search_results:
 
             discription = self._clean_text(
-                data.find("div", class_="plot").text)
+                data.find("div", class_="plot").text
+            )
 
             a_tag = data.div.div.figure.a
             movie_name = a_tag["title"]
@@ -105,8 +106,6 @@ class AvaMovieScraper:
                 "movie_discription": discription,
             }
 
-
-        print(results)
         return MovieExtractedData(**results)
 
     def search_and_extract_data(self, search_param: str) -> MovieExtractedData | bool:

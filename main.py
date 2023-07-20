@@ -19,16 +19,16 @@ def main() -> None:
 
     ShowNoticeMessage.searching_message()
 
-    search_results = movie_scraper.search_and_extract_data(movie_name)
+    search_result = movie_scraper.search_and_extract_data(movie_name)
     clear_terminal_screen()
 
-    if not search_results:
+    if not search_result:
         ShowNoticeMessage.nothing_found_message()
         quit()
 
     movies_link_page = dict()
     counter = 0
-    for movie_name, movie_data in search_results.movies.items():
+    for movie_name, movie_data in search_result.movies.items():
         print(f"\n\t :movie_camera: {counter}. {movie_name}")
         movies_link_page[counter] = movie_data
         counter += 1
@@ -39,12 +39,12 @@ def main() -> None:
     ShowNoticeMessage.searching_for_links_message()
 
     download_links = movie_scraper.get_movie_download_links(
-        movie_informations["movie_link"]
+        movie_informations.movie_link
     )
 
     clear_terminal_screen()
 
-    print(Panel(movie_informations["movie_discription"]))
+    print(Panel(movie_informations.movie_discription))
 
     for quality, download_link in download_links.items():
         print("\n:star2:", quality, ":", download_link)
