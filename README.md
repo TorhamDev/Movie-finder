@@ -26,14 +26,3 @@ python main.py
 
 # Enjoy :)
 ```
-
-
-
-
-TODO :
-- [X] Add python rich
-- [X] Make script for onyl movies
-- [ ] Add time report for search
-- [X] Fix spider man moveis bug
-- [ ] Add pydantic to project
-- [ ] Trying to handle receiving serial links
